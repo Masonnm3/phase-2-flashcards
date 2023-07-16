@@ -1,5 +1,6 @@
 import React from 'react'
 import "../App.css"
+import NewDeck from './NewDeck'
 
 function SideBar() {
   return (
@@ -8,8 +9,8 @@ function SideBar() {
         <div class="container">
                 < div class ="nav">
                     <h1> Decks </h1>
-                    <button onClick='showCreateCard'> New Deck </button>
-                    <button onClick='delFlashCard'> Del Deck </button>
+                    < NewDeck />
+                    
                 </div>
 
         </div>
