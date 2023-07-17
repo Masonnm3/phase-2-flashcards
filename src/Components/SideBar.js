@@ -1,5 +1,5 @@
 import React from 'react'
-import "../App.css"
+import "./sidebar.css"
 import Deck from './Decks'
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HiPlusCircle, HiStop } from "react-icons/hi";
@@ -22,7 +22,7 @@ function SideBar({
        < IconBar/>
       </div>
       <h1 className="sidebar-title">Flashcards</h1>
-            <HiPlusCircle className="add-deck-button" onClick={createNewDeck} />
+      <HiPlusCircle className="add-deck-button" onClick={createNewDeck} />
     </div>
     <div className="separator"></div>
           {userDecks.map((userDeck, i) => (

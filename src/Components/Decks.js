@@ -70,6 +70,11 @@ function Decks({deck,
         />
         <BsBoxArrowInRight
           className="view-deck-button"
+          onClick={() => {
+            
+            setSelectedDeck(deck);
+            
+          }}
         />
       </div>
       
