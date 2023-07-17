@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import SideBar from "./containers/SideBar";
-import { initialDecks } from "./InitialData/InitialDecks";
+import { initialDecks } from "./InitinalData/InitialDecks";
 import "./App.css";
 
 function App() {
