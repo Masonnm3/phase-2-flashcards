@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GoTrash } from "react-icons/go";
 import { BsBoxArrowInRight } from "react-icons/bs";
-import "./Decks.css";
+import "./Deck.css";
 
 export default function Deck({
   deck,
@@ -10,6 +10,7 @@ export default function Deck({
   setSelectedDeck,
   userDecks,
   setUserDecks,
+ 
   setCardSide,
 }) {
   const [deckTitle, setDeckTitle] = useState(deck.data.name);
@@ -65,7 +66,7 @@ export default function Deck({
         onClick={() => {
           setCardSide("front");
           setSelectedDeck(deck);
-          ;
+          setAddQuestionsView(true);
         }}
       >
         Add cards
@@ -74,18 +75,15 @@ export default function Deck({
       <div className="deck-buttons">
         <GoTrash
           className="remove-deck-button"
-          onClick={() => {
-            removeDeck(deck);
-            ;
-          }}
+        
         />
         <BsBoxArrowInRight
           className="view-deck-button"
           onClick={() => {
-            ;
+            
             setCardSide("front");
             setSelectedDeck(deck);
-           
+            
           }}
         />
       </div>

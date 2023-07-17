@@ -3,10 +3,11 @@ import { GiMagnifyingGlass, GiStack } from "react-icons/gi";
 import { ImLab } from "react-icons/im";
 import { HiPhotograph } from "react-icons/hi";
 
-export default function IconBar() {
+export default function IconBar({ setQuizMode, setAddQuestionsView }) {
   return (
     <div className="sidebar-icon-bar">
-      <RiHome4Line className="sidebar-icon"/>
+      <RiHome4Line
+      />
       <RiMenuLine className="sidebar-icon" />
       <GiMagnifyingGlass className="sidebar-icon" />
       <RiBook2Line className="sidebar-icon" />
