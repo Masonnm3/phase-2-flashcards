@@ -17,9 +17,30 @@ body {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  width: 15vw;
+  width: 25vw;
   height: 100%;
   background-color: #f0f0f1;
   color: #000000;
   overflow-y: scroll;
+}
+
+.card { 
+  border: 6px solid #de3030;
+  border-radius: 10px;
+  padding:10px;
+  width: 250px;
+  margin:10px;
+}
+.DeckMenu{
+  position:relative;
+top: 0;
+left: 0;
+bottom: 0;
+display: flex;
+flex-direction: column;
+width: 25vw;
+height: 100%;
+background-color: #0808c010;
+color: #000000;
+overflow-y: scroll;
 }
