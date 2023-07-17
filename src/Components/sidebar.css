@@ -53,15 +53,15 @@
 }
 
 .add-deck-button {
-  width:3em;
-  height: 3em;
+  width:7em;
+  height: 7em;
   cursor: pointer;
   margin-right: 8px;
 }
 
 .deck-button {
-  width: 3em;
-  height: 3em;
+  width: 7em;
+  height: 7em;
   cursor: pointer;
   margin-right: 8px;
 }

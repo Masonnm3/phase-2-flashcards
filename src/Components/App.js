@@ -8,6 +8,8 @@ import { initialDecks } from './initialData/initialDecks';
 function App() {
   const [userDecks, setUserDecks] = useState([]);
   const [selectedDeck, setSelectedDeck] = useState({});
+  const [cardSide, setCardSide] = useState("front");
+  const [addQuestionsView, setAddQuestionsView] = useState(false);
 
   useEffect(() => {
     Fetchdecks();
@@ -55,6 +57,54 @@ const addCard = () => {
 
   setUserDecks(newDecks);
 };
+ // Removes the selected card from the selected deck
+ const deleteCard = (currentCard) => {
+  const filteredCardList = selectedDeck.content.filter(
+    (card) => card.front !== currentCard.front
+  );
+  userDecks.filter((deck) => deck.id !== selectedDeck.id);
+
+  const newSelectedDeck = {
+    id: selectedDeck.id,
+    data: selectedDeck.data,
+    content: filteredCardList,
+  };
+  setSelectedDeck(newSelectedDeck);
+
+  const newDecks = [...userDecks];
+  newDecks.splice(selectedDeck.id, 1, newSelectedDeck);
+
+  setUserDecks(newDecks);
+};
+
+//Updates the selected card to user inputs
+const updateCard = (index, front, back) => {
+  const newCardData = { front: front, back: back };
+
+  const cardList = [...selectedDeck.content];
+  cardList.splice(index, 1, newCardData);
+
+  const newSelectedDeckData = {
+    id: selectedDeck.id,
+    data: selectedDeck.data,
+    content: cardList,
+  };
+  setSelectedDeck(newSelectedDeckData);
+
+  const newDecks = [...userDecks];
+
+  newDecks.splice(selectedDeck.id, 1, newSelectedDeckData);
+
+  setUserDecks(newDecks);
+};
+
+// Removes the selected deck from deck list state: userDecks
+const removeDeck = (deck) => {
+  const updatedDeckList = [...userDecks];
+  updatedDeckList.splice(deck.id, 1);
+  setUserDecks(updatedDeckList);
+};
+
  
 
 
@@ -62,10 +112,18 @@ const addCard = () => {
    return (
     <div className="App">
     <Sidebar
-    userDecks={userDecks}
-    setUserDecks={setUserDecks}
-    createNewDeck={createNewDeck}
-    addCard={addCard}
+     userDecks={userDecks}
+     setUserDecks={setUserDecks}
+     removeDeck={removeDeck}
+     createNewDeck={createNewDeck}
+     selectedDeck={selectedDeck}
+     setSelectedDeck={setSelectedDeck}
+     addCard={addCard}
+     cardSide={cardSide}
+     setCardSide={setCardSide}
+     deleteCard={deleteCard}
+     updateCard={updateCard}
+     setAddQuestionsView={setAddQuestionsView}
     
     />
   </div>

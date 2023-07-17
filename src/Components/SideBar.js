@@ -1,17 +1,24 @@
 import React from 'react'
 import "./sidebar.css"
 import Deck from './Decks'
-import { AiFillPlayCircle } from "react-icons/ai";
+
 import { HiPlusCircle, HiStop } from "react-icons/hi";
 import IconBar from '../containers/iconBar';
 
 function SideBar({
   userDecks,
   createNewDeck,
+  removeDeck,
+  addQuestionsView,
+  setAddQuestionsView,
   selectedDeck,
   setSelectedDeck,
   setUserDecks,
   addCard,
+  cardSide,
+  setCardSide,
+  deleteCard,
+  updateCard,
  
 
 }) {
@@ -29,10 +36,13 @@ function SideBar({
             <Deck
             key={`deck ${i}`}
               deck={userDeck}
+              removeDeck={removeDeck}
+              setAddQuestionsView={setAddQuestionsView}
               setSelectedDeck={setSelectedDeck}
               userDecks={userDecks}
               setUserDecks={setUserDecks}
-             
+
+              setCardSide={setCardSide}
             />
           ))}
 

@@ -1,25 +1,26 @@
 import { useState } from "react";
 import { GoTrash } from "react-icons/go";
 import { BsBoxArrowInRight } from "react-icons/bs";
-import "./Deck.css";
+import "./Decks.css";
 
-
-function Decks({deck,
+export default function Deck({
+  deck,
+  removeDeck,
+  setAddQuestionsView,
   setSelectedDeck,
   userDecks,
-  setUserDecks,}) {
-   
-    const [deckTitle, setDeckTitle] = useState(deck.data.name);
+  setUserDecks,
+  setCardSide,
+}) {
+  const [deckTitle, setDeckTitle] = useState(deck.data.name);
   const [changingName, setChangingName] = useState(false);
 
+  //sets ability to edit deck title
+  const changeDeckName = () => {
+    setChangingName(true);
+  };
 
- //sets ability to edit deck title
- const changeDeckName = () => {
-  setChangingName(true);
-};
-
-
-      //changes the current deck title
+  //changes the current deck title
   const titleChange = (event) => {
     setDeckTitle(event.target.value);
   };
@@ -39,10 +40,7 @@ function Decks({deck,
     filteredDecks.splice(index, 0, newDeckData);
     setUserDecks(filteredDecks);
   };
-  
-  
-  
-  
+
   return (
     <div className="deck" key={`deck ${deck.id}`}>
       {changingName === false ? (
@@ -62,25 +60,35 @@ function Decks({deck,
           </button>
         </div>
       )}
+      <p
+        className="add-cards-button"
+        onClick={() => {
+          setCardSide("front");
+          setSelectedDeck(deck);
+          ;
+        }}
+      >
+        Add cards
+      </p>
+
       <div className="deck-buttons">
         <GoTrash
           className="remove-deck-button"
-         
-          
+          onClick={() => {
+            removeDeck(deck);
+            ;
+          }}
         />
         <BsBoxArrowInRight
           className="view-deck-button"
           onClick={() => {
-            
+            ;
+            setCardSide("front");
             setSelectedDeck(deck);
-            
+           
           }}
         />
       </div>
-      
-    
-
-      </div> )}
-
-
-export default Decks
+    </div>
+  );
+}
