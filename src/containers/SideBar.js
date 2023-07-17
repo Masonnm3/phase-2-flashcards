@@ -1,5 +1,5 @@
 
-import { HiPlusCircle, HiStop } from "react-icons/hi";
+import { HiPlusCircle } from "react-icons/hi";
 import Deck from "../components/Deck";
 import IconBar from "./IconBar";
 import Card from "../components/Card";
