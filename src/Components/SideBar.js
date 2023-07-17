@@ -1,26 +1,42 @@
 import React from 'react'
 import "../App.css"
 import Deck from './Decks'
+import { AiFillPlayCircle } from "react-icons/ai";
+import { HiPlusCircle, HiStop } from "react-icons/hi";
+import IconBar from '../containers/iconBar';
 
-function SideBar({decks}) {
+function SideBar({
+  userDecks,
+  createNewDeck,
+  selectedDeck,
+  setSelectedDeck,
+  setUserDecks,
+  addCard,
+ 
+
+}) {
   return (
     <header> 
-    <div className="Sidebar" > 
-        <div className="container">
-                < div className ="nav">
-                    <h1> Decks </h1>
-                     {decks.map((deck) => (
-                      
-                      <Deck key = {deck.name} deck={deck} />,
-                      <Card/>
-                     ))}
-                    
-                </div>
-
-        </div>
-       
-
+    <div className="sidebar">
+      <div className='sidebar-header'>
+       < IconBar/>
+      </div>
+      <h1 className="sidebar-title">Flashcards</h1>
+            <HiPlusCircle className="add-deck-button" onClick={createNewDeck} />
     </div>
+    <div className="separator"></div>
+          {userDecks.map((userDeck, i) => (
+            <Deck
+            key={`deck ${i}`}
+              deck={userDeck}
+              setSelectedDeck={setSelectedDeck}
+              userDecks={userDecks}
+              setUserDecks={setUserDecks}
+             
+            />
+          ))}
+
+   
     </header>
 
   )
