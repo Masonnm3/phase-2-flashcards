@@ -13,7 +13,7 @@ export default function Deck({
  
   setCardSide,
 }) {
-  const [deckTitle, setDeckTitle] = useState(deck.data.name);
+  const [deckTitle, setDeckTitle] = useState(deck.deckname);
   const [changingName, setChangingName] = useState(false);
 
   //sets ability to edit deck title

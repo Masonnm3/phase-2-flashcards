@@ -48,7 +48,7 @@ export default function SideBar({
           <div className="sidebar-header">
             <IconBar
             />
-            <h1 className="sidebar-title">{selectedDeck.data.name}</h1>
+            <h1 className="sidebar-title">{selectedDeck.deckname}</h1>
             <div className="deck-data">
               <p className="deck-length">{selectedDeck.content.length} cards</p>
               

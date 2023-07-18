@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import React ,{ useState, useEffect } from "react";
 import SideBar from "./containers/SideBar";
-import { initialDecks } from "./InitinalData/InitialDecks";
+// import { initialDecks } from "./InitinalData/InitialDecks";
 import "./App.css";
+
 
 function App() {
   const [userDecks, setUserDecks] = useState([]);
@@ -17,9 +18,10 @@ function App() {
 
  const fetchdecks = async () =>  {
     try{
-        const response = await fetch ("http://localhost:3000/Decks");
+        const response = await fetch ("http://localhost:3000/decks");
         const data = await response.json();
-        setUserDecks(initialDecks);
+        setUserDecks(data);
+        console.log(data)
     }
         catch(error){
             console.log("error fetching decks" + error)
