@@ -81,12 +81,7 @@ export default function Deck({
         />
         <BsBoxArrowInRight
           className="view-deck-button"
-          onClick={() => {
-            
-            setCardSide("front");
-            setSelectedDeck(deck);
-            
-          }}
+          
         />
       </div>
     </div>
