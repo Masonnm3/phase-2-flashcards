@@ -75,6 +75,8 @@ export default function Deck({
       <div className="deck-buttons">
         <GoTrash
           className="remove-deck-button"
+          onClick={()=> 
+        removeDeck(deck)}
         
         />
         <BsBoxArrowInRight
