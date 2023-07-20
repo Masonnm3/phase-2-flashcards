@@ -21,18 +21,13 @@
           "back": "An african swallow, or a European swallow?! "
         }
       ]
-    }
-  ],
-     
-  "cards" :[
+    },
     {
+      "id": 1,
       "deckname": "",
-      "front":"" , 
-       "back":""
+      "content": [
+        {}
+      ]
     }
-
-     ]
-
-   
-  
+  ]
 }

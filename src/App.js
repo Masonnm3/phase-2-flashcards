@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "./containers/SideBar";
+import IconBar from "./containers/IconBar"
 // import { initialDecks } from "./InitinalData/InitialDecks";
 import "./App.css";
 
@@ -9,6 +10,11 @@ function App() {
   const [selectedDeck, setSelectedDeck] = useState([]);
   const [addQuestionsView, setAddQuestionsView] = useState(false);
   const [cardSide, setCardSide] = useState("front");
+
+  const goHome = () => {
+    setSelectedDeck([]); 
+    setAddQuestionsView(false);
+  };
 
 
   // retrieves persisted decks through local storage
@@ -28,7 +34,6 @@ function App() {
     }
   }
 
-
   //creates a new deck and adds it to the user deck list state: userDecks
   const createNewDeck = () => {
     const newDeck = {
@@ -47,17 +52,12 @@ function App() {
 
   }
     ;
-  
- 
-   
-  
 
   // Creates a new card, and adds it to the selected deck
   const addCard = () => {
     const newCard = { deckname:'',front: "", back: "" };
     const newCardList = [...selectedDeck.content, newCard];
     const index = selectedDeck.id;
-
 
     const updateDecks = {
       ...userDecks
@@ -80,19 +80,13 @@ function App() {
     setUserDecks(newDecks);
     setUserDecks([...userDecks]);
     
-    
     fetch("http://localhost:3000/cards", {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCard)
     })
-   
 
   };
-
-
-
-
 
   // Removes the selected card from the selected deck
   const deleteCard = (currentCard) => {
@@ -113,6 +107,7 @@ function App() {
 
     setUserDecks(newDecks);
   };
+  
 
   //Updates the selected card to user inputs
   const updateCard = (index, front, back) => {
@@ -120,8 +115,6 @@ function App() {
 
     const cardList = [...selectedDeck.content];
     cardList.splice(index, 1, newCardData);
-
-
 
     const newSelectedDeckData = {
       id: selectedDeck.id,
@@ -135,8 +128,6 @@ function App() {
     newDecks.splice(selectedDeck.id, 1, newSelectedDeckData);
 
     setUserDecks(newDecks);
-
-
 
   };
 
@@ -165,6 +156,7 @@ function App() {
         updateCard={updateCard}
         
       />
+      <IconBar goHome={goHome} />
 
     </div>
   );
