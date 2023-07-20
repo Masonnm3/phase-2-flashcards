@@ -18,6 +18,7 @@ export default function SideBar({
   setCardSide,
   deleteCard,
   updateCard,
+  createNewObj
 }) {
   return (
     <div>
@@ -26,7 +27,7 @@ export default function SideBar({
           <div className="sidebar-header">
             <IconBar
             />
-            <h1 className="sidebar-title">Flashcards</h1>
+            <h1 className="sidebar-title">Decks</h1>
             <HiPlusCircle className="add-deck-button" onClick={createNewDeck} />
           </div>
           <div className="separator"></div>
