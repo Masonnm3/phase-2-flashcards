@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import SideBar from "./containers/SideBar";
 import { initialDecks } from "./InitinalData/InitialDecks";
+import AboutPage from "./pages/AboutPage"
+import ContactPage from "./pages/ContactPage";
 import "./App.css";
 import  {Routes ,  Route} from 'react-router-dom'
 
@@ -151,11 +153,24 @@ function App() {
         dontKnowItCards={dontKnowItCards}
         setDontKnowItCards={setDontKnowItCards}
       />
-    </div>} >
+    </div>}>
 
     </Route>
+    <Route path="/AboutPage" element={
+      <div classname="About">
+        <AboutPage/>
+      </div>}>
+    </Route>
+       
+    <Route path="/Contact" element={
+      <div classname="Contact">
+        <ContactPage />
+      </div>}>
+        </Route>
+
+
     </Routes>
-  );
+  )
 }
 
 export default App;
