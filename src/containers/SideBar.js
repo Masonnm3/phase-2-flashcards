@@ -1,5 +1,5 @@
-
-import { HiPlusCircle } from "react-icons/hi";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { HiPlusCircle, HiStop } from "react-icons/hi";
 import Deck from "../components/Deck";
 import IconBar from "./IconBar";
 import Card from "../components/Card";
@@ -15,10 +15,14 @@ export default function SideBar({
   setSelectedDeck,
   setUserDecks,
   addCard,
+  quizMode,
+  setQuizMode,
+  questionNumber,
+  setQuestionNumber,
+  cardSide,
   setCardSide,
   deleteCard,
   updateCard,
-  createNewObj
 }) {
   return (
     <div>
@@ -26,8 +30,10 @@ export default function SideBar({
         <div className="sidebar">
           <div className="sidebar-header">
             <IconBar
+              setQuizMode={setQuizMode}
+              setAddQuestionsView={setAddQuestionsView}
             />
-            <h1 className="sidebar-title">Decks</h1>
+            <h1 className="sidebar-title">Flashcards</h1>
             <HiPlusCircle className="add-deck-button" onClick={createNewDeck} />
           </div>
           <div className="separator"></div>
@@ -40,6 +46,8 @@ export default function SideBar({
               setSelectedDeck={setSelectedDeck}
               userDecks={userDecks}
               setUserDecks={setUserDecks}
+              setQuizMode={setQuizMode}
+              setQuestionNumber={setQuestionNumber}
               setCardSide={setCardSide}
             />
           ))}
@@ -48,11 +56,23 @@ export default function SideBar({
         <div className="sidebar">
           <div className="sidebar-header">
             <IconBar
+              setQuizMode={setQuizMode}
+              setAddQuestionsView={setAddQuestionsView}
             />
-            <h1 className="sidebar-title">{selectedDeck.deckname}</h1>
+            <h1 className="sidebar-title">{selectedDeck.data.name}</h1>
             <div className="deck-data">
               <p className="deck-length">{selectedDeck.content.length} cards</p>
-              
+              {quizMode === false ? (
+                <AiFillPlayCircle
+                  className="deck-button"
+                  onClick={() => setQuizMode(!quizMode)}
+                />
+              ) : (
+                <HiStop
+                  className="deck-button"
+                  onClick={() => setQuizMode(!quizMode)}
+                />
+              )}
               <HiPlusCircle className="deck-button" onClick={addCard} />
             </div>
           </div>

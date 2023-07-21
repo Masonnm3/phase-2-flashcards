@@ -10,10 +10,11 @@ export default function Deck({
   setSelectedDeck,
   userDecks,
   setUserDecks,
- 
+  setQuizMode,
+  setQuestionNumber,
   setCardSide,
 }) {
-  const [deckTitle, setDeckTitle] = useState(deck.deckname);
+  const [deckTitle, setDeckTitle] = useState(deck.data.name);
   const [changingName, setChangingName] = useState(false);
 
   //sets ability to edit deck title
@@ -75,13 +76,19 @@ export default function Deck({
       <div className="deck-buttons">
         <GoTrash
           className="remove-deck-button"
-          onClick={()=> 
-        removeDeck(deck)}
-        
+          onClick={() => {
+            removeDeck(deck);
+            setQuizMode(false);
+          }}
         />
         <BsBoxArrowInRight
           className="view-deck-button"
-          
+          onClick={() => {
+            setQuestionNumber(0);
+            setCardSide("front");
+            setSelectedDeck(deck);
+            setQuizMode(true);
+          }}
         />
       </div>
     </div>

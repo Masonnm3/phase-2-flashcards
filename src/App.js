@@ -1,74 +1,58 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import HomePage from "./pages/HomePage";
 import SideBar from "./containers/SideBar";
-import IconBar from "./containers/IconBar"
-// import { initialDecks } from "./InitinalData/InitialDecks";
+import { initialDecks } from "./InitinalData/InitialDecks";
 import "./App.css";
+import  {Routes ,  Route} from 'react-router-dom'
 
 
 function App() {
   const [userDecks, setUserDecks] = useState([]);
-  const [selectedDeck, setSelectedDeck] = useState([]);
+  const [selectedDeck, setSelectedDeck] = useState({});
   const [addQuestionsView, setAddQuestionsView] = useState(false);
+  const [quizMode, setQuizMode] = useState(false);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [cardSide, setCardSide] = useState("front");
-
-  const goHome = () => {
-    setSelectedDeck([]); 
-    setAddQuestionsView(false);
-  };
-
+  const [knowItCards, setKnowItCards] = useState([]);
+  const [dontKnowItCards, setDontKnowItCards] = useState([]);
 
   // retrieves persisted decks through local storage
   useEffect(() => {
-    fetchdecks();
-  }, [])
-
-  const fetchdecks = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/decks");
-      const data = await response.json();
-      setUserDecks(data);
-
+    const data = localStorage.getItem("deck-list");
+    if (data) {
+      setUserDecks(JSON.parse(data));
+    } else {
+      setUserDecks(initialDecks);
     }
-    catch (error) {
-      console.log("error fetching decks" + error)
-    }
-  }
+  }, []);
+
+  // persists decks to local storage
+  useEffect(() => {
+    localStorage.setItem("deck-list", JSON.stringify(userDecks));
+  });
 
   //creates a new deck and adds it to the user deck list state: userDecks
   const createNewDeck = () => {
     const newDeck = {
-      id: "",
-      deckname: "",
-      content: [{}],
+      id: userDecks.length,
+      data: { name: "Click title area to name your new deck" },
+      content: [],
     };
-
     setUserDecks([...userDecks, newDeck]);
-    fetch("http://localhost:3000/decks", {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newDeck)
-
-    })
-
-  }
-    ;
+  };
 
   // Creates a new card, and adds it to the selected deck
   const addCard = () => {
-    const newCard = { deckname:'',front: "", back: "" };
+    const newCard = { front: "Front Side", back: "Back Side" };
     const newCardList = [...selectedDeck.content, newCard];
     const index = selectedDeck.id;
-
-    const updateDecks = {
-      ...userDecks
-      , content: [userDecks.content, newCard]
-    }
 
     const updatedDeckData = {
       id: index,
       data: selectedDeck.data,
       content: newCardList,
-    }
+    };
+
     setSelectedDeck(updatedDeckData);
 
     const newDecks = [...userDecks];
@@ -78,14 +62,6 @@ function App() {
       .splice(index, 1, updatedDeckData);
 
     setUserDecks(newDecks);
-    setUserDecks([...userDecks]);
-    
-    fetch("http://localhost:3000/cards", {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newCard)
-    })
-
   };
 
   // Removes the selected card from the selected deck
@@ -107,7 +83,6 @@ function App() {
 
     setUserDecks(newDecks);
   };
-  
 
   //Updates the selected card to user inputs
   const updateCard = (index, front, back) => {
@@ -128,7 +103,6 @@ function App() {
     newDecks.splice(selectedDeck.id, 1, newSelectedDeckData);
 
     setUserDecks(newDecks);
-
   };
 
   // Removes the selected deck from deck list state: userDecks
@@ -139,7 +113,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+   <Routes>
+   <Route path ='/' element={
+   <div className="App">
       <SideBar
         userDecks={userDecks}
         setUserDecks={setUserDecks}
@@ -150,17 +126,36 @@ function App() {
         selectedDeck={selectedDeck}
         setSelectedDeck={setSelectedDeck}
         addCard={addCard}
+        quizMode={quizMode}
+        setQuizMode={setQuizMode}
+        questionNumber={questionNumber}
+        setQuestionNumber={setQuestionNumber}
         cardSide={cardSide}
         setCardSide={setCardSide}
         deleteCard={deleteCard}
         updateCard={updateCard}
-        
+      /> 
+      <HomePage
+        userDecks={userDecks}
+        setUserDecks={setUserDecks}
+        quizMode={quizMode}
+        setQuizMode={setQuizMode}
+        selectedDeck={selectedDeck}
+        questionNumber={questionNumber}
+        setQuestionNumber={setQuestionNumber}
+        cardSide={cardSide}
+        setCardSide={setCardSide}
+        deleteCard={deleteCard}
+        knowItCards={knowItCards}
+        setKnowItCards={setKnowItCards}
+        dontKnowItCards={dontKnowItCards}
+        setDontKnowItCards={setDontKnowItCards}
       />
-      <IconBar goHome={goHome} />
+    </div>} >
 
-    </div>
+    </Route>
+    </Routes>
   );
 }
-
 
 export default App;
