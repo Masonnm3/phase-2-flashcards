@@ -2,6 +2,8 @@ import { RiMenuLine, RiHome4Line, RiBook2Line, RiInformationLine, RiPhoneLine } 
 import { GiMagnifyingGlass  } from "react-icons/gi";
 import { Link } from 'react-router-dom'
 
+
+
 const AboutPage = () =>{
     return(
     <>

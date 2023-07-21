@@ -7,7 +7,10 @@ export default function IconBar({ setQuizMode, setAddQuestionsView }) {
   return (
     <div className="sidebar-icon-bar">
     <Link to='/'>
-        <RiHome4Line className="sidebar-icon" />
+        <RiHome4Line className="sidebar-icon"  onClick={() => {
+          setQuizMode(false);
+          setAddQuestionsView(false);
+        }}/>
     </Link>
         <RiMenuLine className="sidebar-icon" />
         <GiMagnifyingGlass className="sidebar-icon" />
